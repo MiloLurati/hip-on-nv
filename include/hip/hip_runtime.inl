@@ -343,7 +343,7 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
   if (cudaError != cudaSuccess) {
     return cudaError2hipError(cudaError);
   }
-  strncpy(prop->name, cudaProp.name, sizeof(prop->name));
+  strcpy(prop->name, cudaProp.name);
   prop->totalGlobalMem = cudaProp.totalGlobalMem;
   prop->sharedMemPerBlock = cudaProp.sharedMemPerBlock;
   prop->regsPerBlock = cudaProp.regsPerBlock;
