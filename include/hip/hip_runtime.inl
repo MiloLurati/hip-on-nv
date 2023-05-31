@@ -3,6 +3,7 @@
 
 #include <cuda.h>
 #include <cuda_runtime_api.h>
+#include <stdio.h>
 
 #if __cplusplus
 extern "C" {
