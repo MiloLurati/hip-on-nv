@@ -338,7 +338,34 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     ;
 #else
 {
-  return cudaError2hipError(cudaGetDeviceProperties(prop, device));
+  cudaDeviceProp cudaProp;
+  cudaError_t cudaError = cudaGetDeviceProperties(&cudaProp, device);
+  if (cudaError != cudaSuccess) {
+    return cudaError2hipError(cudaError);
+  }
+  strncpy(prop->name, cudaProp.name, sizeof(prop->name));
+  prop->totalGlobalMem = cudaProp.totalGlobalMem;
+  prop->sharedMemPerBlock = cudaProp.sharedMemPerBlock;
+  prop->regsPerBlock = cudaProp.regsPerBlock;
+  prop->warpSize = cudaProp.warpSize;
+  prop->maxThreadsPerBlock = cudaProp.maxThreadsPerBlock;
+  prop->maxThreadsDim[0] = cudaProp.maxThreadsDim[0];
+  prop->maxThreadsDim[1] = cudaProp.maxThreadsDim[1];
+  prop->maxThreadsDim[2] = cudaProp.maxThreadsDim[2];
+  prop->maxGridSize[0] = cudaProp.maxGridSize[0];
+  prop->maxGridSize[1] = cudaProp.maxGridSize[1];
+  prop->maxGridSize[2] = cudaProp.maxGridSize[2];
+  prop->clockRate = cudaProp.clockRate;
+  prop->memoryClockRate = cudaProp.memoryClockRate;
+  prop->memoryBusWidth = cudaProp.memoryBusWidth;
+  prop->totalConstMem = cudaProp.totalConstMem;
+  prop->major = cudaProp.major;
+  prop->minor = cudaProp.minor;
+  prop->multiProcessorCount = cudaProp.multiProcessorCount;
+  prop->l2CacheSize = cudaProp.l2CacheSize;
+  prop->maxThreadsPerMultiProcessor = cudaProp.maxThreadsPerMultiProcessor;
+  prop->computeMode = cudaProp.computeMode;
+
 }
 #endif
 
