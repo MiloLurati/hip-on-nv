@@ -4,6 +4,7 @@
 #include <cuda.h>
 #include <cuda_runtime_api.h>
 #include <string.h>
+#include <stdio.h>
 
 #if __cplusplus
 extern "C" {
@@ -347,7 +348,9 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->sharedMemPerBlock = cudaProp.sharedMemPerBlock;
     prop->regsPerBlock = cudaProp.regsPerBlock;
     prop->warpSize = cudaProp.warpSize;
+    printf("cudaProp.maxThreadsPerBlock = %d\n", cudaProp.maxThreadsPerBlock);
     prop->maxThreadsPerBlock = cudaProp.maxThreadsPerBlock;
+    printf("prop->maxThreadsPerBlock = %d\n", prop->maxThreadsPerBlock);
     prop->maxThreadsDim[0] = cudaProp.maxThreadsDim[0];
     prop->maxThreadsDim[1] = cudaProp.maxThreadsDim[1];
     prop->maxThreadsDim[2] = cudaProp.maxThreadsDim[2];
