@@ -365,12 +365,12 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->minor = cudaProp.minor;
     prop->multiProcessorCount = cudaProp.multiProcessorCount;
     prop->l2CacheSize = cudaProp.l2CacheSize;
+    prop->maxThreadsPerMultiProcessor = cudaProp.maxThreadsPerMultiProcessor;
     prop->computeMode = cudaProp.computeMode;
     prop->concurrentKernels = cudaProp.concurrentKernels;
     prop->pciDomainID = cudaProp.pciDomainID;
     prop->pciBusID = cudaProp.pciBusID;
     prop->pciDeviceID = cudaProp.pciDeviceID;
-    prop->maxSharedMemoryPerMultiProcessor = cudaProp.sharedMemPerMultiprocessor;
     prop->isMultiGpuBoard = cudaProp.isMultiGpuBoard;
     prop->canMapHostMemory = cudaProp.canMapHostMemory;
     prop->integrated = cudaProp.integrated;
@@ -409,8 +409,9 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->isLargeBar = 0;
     prop->asicRevision = 0;
     prop->clockInstructionRate = 0
-    prop->maxThreadsPerMultiProcessor = 0
+    prop->maxSharedMemoryPerMultiProcessor = 0;
     */
+
 
   }
   return cudaError2hipError(cudaError);
