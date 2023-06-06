@@ -367,12 +367,11 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->l2CacheSize = cudaProp.l2CacheSize;
     prop->maxThreadsPerMultiProcessor = cudaProp.maxThreadsPerMultiProcessor;
     prop->computeMode = cudaProp.computeMode;
-    prop->clockInstructionRate = cudaProp.clockInstructionRate;
     prop->concurrentKernels = cudaProp.concurrentKernels;
     prop->pciDomainID = cudaProp.pciDomainID;
     prop->pciBusID = cudaProp.pciBusID;
-    prop->pciDeviceID = cudaProp.ciDeviceID;
-    prop->maxSharedMemoryPerMultiProcessor = cudaProp.sharedMemoryPerMultiProcessor;
+    prop->pciDeviceID = cudaProp.pciDeviceID;
+    prop->maxSharedMemoryPerMultiProcessor = cudaProp.sharedMemPerMultiprocessor;
     prop->isMultiGpuBoard = cudaProp.isMultiGpuBoard;
     prop->canMapHostMemory = cudaProp.canMapHostMemory;
     prop->integrated = cudaProp.integrated;
@@ -381,8 +380,11 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->cooperativeMultiDeviceLaunch = cudaProp.cooperativeMultiDeviceLaunch;
     prop->maxTexture1DLinear = cudaProp.maxTexture1DLinear;
     prop->maxTexture1D = cudaProp.maxTexture1D;
-    prop->maxTexture2D = cudaProp.maxTexture2D;
-    prop->maxTexture3D = cudaProp.maxTexture3D;
+    prop->maxTexture2D[0] = cudaProp.maxTexture2D[0];
+    prop->maxTexture2D[1] = cudaProp.maxTexture2D[1];
+    prop->maxTexture3D[0] = cudaProp.maxTexture3D[0];
+    prop->maxTexture3D[1] = cudaProp.maxTexture3D[1];
+    prop->maxTexture3D[2] = cudaProp.maxTexture3D[2];
     prop->memPitch = cudaProp.memPitch;
     prop->textureAlignment = cudaProp.textureAlignment;
     prop->texturePitchAlignment = cudaProp.texturePitchAlignment;
@@ -407,6 +409,7 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->cooperativeMultiDeviceUnmatchedSharedMem = 0;
     prop->isLargeBar = 0;
     prop->asicRevision = 0;
+    prop->clockInstructionRate = 0
 
   }
   return cudaError2hipError(cudaError);
