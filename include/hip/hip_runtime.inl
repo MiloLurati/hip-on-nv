@@ -365,7 +365,6 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->minor = cudaProp.minor;
     prop->multiProcessorCount = cudaProp.multiProcessorCount;
     prop->l2CacheSize = cudaProp.l2CacheSize;
-    prop->maxThreadsPerMultiProcessor = cudaProp.maxThreadsPerMultiProcessor;
     prop->computeMode = cudaProp.computeMode;
     prop->concurrentKernels = cudaProp.concurrentKernels;
     prop->pciDomainID = cudaProp.pciDomainID;
@@ -397,7 +396,7 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->pageableMemoryAccess = cudaProp.pageableMemoryAccess;
     prop->pageableMemoryAccessUsesHostPageTables = cudaProp.pageableMemoryAccessUsesHostPageTables;
 
-    // NOT ONE TO ONE MAPPING TO CUDAPROP
+    /* NOT ONE TO ONE MAPPING TO CUDAPROP
     prop->arch = nullptr;
     prop->gcnArch = 0;
     prop->_gcnArchName = nullptr;
@@ -410,6 +409,8 @@ hipError_t hipGetDeviceProperties(hipDeviceProp_t *prop, int device)
     prop->isLargeBar = 0;
     prop->asicRevision = 0;
     prop->clockInstructionRate = 0
+    prop->maxThreadsPerMultiProcessor = 0
+    */
 
   }
   return cudaError2hipError(cudaError);
